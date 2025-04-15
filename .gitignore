@@ -1,2 +1,8 @@
 .env
 /node_modules/
+
+# Serverless Framework artifacts
+.serverless/
+
+# Compiled output
+dist/

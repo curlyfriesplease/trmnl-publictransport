@@ -1,0 +1,44 @@
+service: trmnl-public-transport
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs20.x # Match the Node.js version that supports es2020 target
+  stage: ${opt:stage, 'dev'} # Default stage is 'dev'
+  region: ${opt:region, 'us-east-1'} # Default region, change if needed
+  # Environment variables for the Lambda function
+  environment:
+    BUS_API_KEY: ${env:BUS_API_KEY} # Load from local env for deployment
+    BUS_STOP_A_LATITUDE: ${env:BUS_STOP_A_LATITUDE}
+    BUS_STOP_A_LONGITUDE: ${env:BUS_STOP_A_LONGITUDE}
+    BUS_STOP_A_LINEREFS: ${env:BUS_STOP_A_LINEREFS}
+
+package:
+  patterns:
+    - '!./**'
+    - './dist/**'        # Include the compiled JS code
+    - 'node_modules/**'  # Include production dependencies
+    - '!node_modules/aws-sdk/**' # Exclude AWS SDK (provided by Lambda)
+    - '!src/**'          # Exclude TypeScript source
+    - '!.env*'           # Exclude .env files
+    - '!tsconfig.json'
+    - '!serverless.yml'
+    - '!README.md'
+    - '!.gitignore'
+    - '!.git/**'
+
+functions:
+  busFilter:
+    handler: dist/lambda/bus-filter.handler # Path to the compiled handler
+    memorySize: 256 # Optional: Adjust memory size if needed
+    timeout: 30     # Optional: Adjust timeout if needed
+    description: Fetches and filters bus data based on location and route.
+    events:
+      - httpApi:
+          path: /buses # The API path
+          method: get  # The HTTP method
+
+# Optional: Add plugins if needed, e.g., for TypeScript compilation or .env handling
+# plugins:
+#   - serverless-plugin-typescript
+#   - serverless-dotenv-plugin
