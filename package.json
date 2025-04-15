@@ -1,0 +1,29 @@
+{
+  "name": "trmnl-publictransport",
+  "version": "1.0.0",
+  "description": "Jon's TRMNL Public Transport",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/curlyfriesplease/trmnl-publictransport.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/curlyfriesplease/trmnl-publictransport/issues"
+  },
+  "homepage": "https://github.com/curlyfriesplease/trmnl-publictransport#readme",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.149",
+    "@types/node": "^22.14.1",
+    "@types/xml2js": "^0.4.14",
+    "axios": "^1.8.4",
+    "dotenv": "^16.5.0",
+    "xml2js": "^0.6.2"
+  }
+}
