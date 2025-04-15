@@ -7,6 +7,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 interface VehicleActivity {
+  ItemIdentifier?: [string];
   MonitoredVehicleJourney: [
     {
       LineRef: [string];
@@ -54,7 +55,11 @@ export const handler: Handler = async (event, context) => {
   const busStopALineRefs = busStopALineRefsStr
     .replace(/[\[\]]/g, '') // Remove brackets
     .split(',') // Split by comma
-    .map((ref) => ref.trim()) // Trim whitespace
+    .map((ref) => {
+      const trimmedRef = ref.trim();
+      // Remove surrounding quotes (single or double) if present
+      return trimmedRef.replace(/^['"]|['"]$/g, '');
+    })
     .filter((ref) => ref !== ''); // Remove empty strings
 
   if (isNaN(busStopALatitude) || isNaN(busStopALongitude)) {
@@ -90,9 +95,16 @@ export const handler: Handler = async (event, context) => {
     }
 
     console.log(`Processing ${activities.length} vehicle activities...`);
+    let filteredCount = 0;
+    let missingDataCount = 0;
+    let invalidLatCount = 0;
+    let wrongLineCount = 0;
+    let wrongDirectionCount = 0;
+    let wrongLocationCount = 0;
 
     const filteredBuses: BusLocation[] = activities
       .filter((activity) => {
+        const activityId = activity?.ItemIdentifier?.[0] ?? 'unknown'; // Try to get an identifier
         const journey = activity?.MonitoredVehicleJourney?.[0];
         const location = journey?.VehicleLocation?.[0];
         const lineRef = journey?.LineRef?.[0];
@@ -106,22 +118,58 @@ export const handler: Handler = async (event, context) => {
           !directionRef ||
           !latitudeStr
         ) {
-          // Log missing data for debugging if needed
-          // console.warn('Skipping activity due to missing data:', JSON.stringify(activity));
+          // console.warn(`[${activityId}] Skipping activity due to missing data`);
+          missingDataCount++;
           return false;
         }
 
         const latitude = parseFloat(latitudeStr);
         if (isNaN(latitude)) {
-          // console.warn('Skipping activity due to invalid latitude:', latitudeStr);
+          // console.warn(`[${activityId}] Skipping activity due to invalid latitude: ${latitudeStr}`);
+          invalidLatCount++;
           return false;
         }
 
-        const isTargetLine = busStopALineRefs.includes(lineRef);
-        const isInbound = directionRef === 'inbound';
-        const isNorthOfStop = latitude > busStopALatitude;
+        // Ensure we compare trimmed strings
+        const trimmedLineRef = lineRef.trim();
+        const isTargetLine = busStopALineRefs.includes(trimmedLineRef);
 
-        return isTargetLine && isInbound && isNorthOfStop;
+        //  Detailed logging for the comparison
+        console.log(
+          `[${activityId}] Comparing LineRef: XML='${trimmedLineRef}' (type: ${typeof trimmedLineRef}) with Target='${busStopALineRefs.join(
+            ', '
+          )}' (element types: ${busStopALineRefs
+            .map((t) => typeof t)
+            .join(', ')}) -> Match: ${isTargetLine}`
+        );
+
+        if (!isTargetLine) {
+          // console.log(
+          //   `[${activityId}] Filtering out: Incorrect LineRef (${lineRef}). Target: ${busStopALineRefs.join(
+          //     ', '
+          //   )}`
+          // );
+          wrongLineCount++;
+          return false;
+        }
+
+        const isInbound = directionRef === 'inbound';
+        if (!isInbound) {
+          // console.log(`[${activityId}] Filtering out: Incorrect DirectionRef (${directionRef}). Target: inbound`);
+          wrongDirectionCount++;
+          return false;
+        }
+
+        const isNorthOfStop = latitude > busStopALatitude;
+        if (!isNorthOfStop) {
+          // console.log(`[${activityId}] Filtering out: South of stop (${latitude} <= ${busStopALatitude})`);
+          wrongLocationCount++;
+          return false;
+        }
+
+        // If all checks pass, keep the activity
+        filteredCount++;
+        return true;
       })
       .map((activity) => {
         const location = activity.MonitoredVehicleJourney[0].VehicleLocation[0];
@@ -130,8 +178,18 @@ export const handler: Handler = async (event, context) => {
         return { latitude, longitude };
       });
 
+    console.log(`\nFiltering Summary:`);
+    console.log(`- Total activities processed: ${activities.length}`);
+    console.log(`- Skipped (missing data): ${missingDataCount}`);
+    console.log(`- Skipped (invalid latitude): ${invalidLatCount}`);
+    console.log(`- Filtered out (wrong line): ${wrongLineCount}`);
+    console.log(`- Filtered out (wrong direction): ${wrongDirectionCount}`);
+    console.log(`- Filtered out (south of stop): ${wrongLocationCount}`);
+    console.log(`- Activities kept: ${filteredCount}`);
+    console.log(`  (Should match final count: ${filteredBuses.length})`);
+
     console.log(
-      `Found ${filteredBuses.length} matching buses north of stop A.`
+      `\nFound ${filteredBuses.length} matching buses north of stop A.`
     );
     console.log(
       'Filtered Bus Locations:',
