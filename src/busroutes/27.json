@@ -1,0 +1,265 @@
+[
+  {
+    "latitude": 50.840639,
+    "longitude": -0.157402,
+    "minutesAway": 1,
+    "expectedCompassDirection": [
+      "SE"
+    ]
+  },
+  {
+    "latitude": 50.841209,
+    "longitude": -0.157985,
+    "minutesAway": 2,
+    "expectedCompassDirection": [
+      "SE"
+    ]
+  },
+  {
+    "latitude": 50.843345,
+    "longitude": -0.159279,
+    "minutesAway": 3,
+    "expectedCompassDirection": [
+      "SE"
+    ]
+  },
+  {
+    "latitude": 50.84565,
+    "longitude": -0.160131,
+    "minutesAway": 4,
+    "expectedCompassDirection": [
+      "SE"
+    ]
+  },
+  {
+    "latitude": 50.847882,
+    "longitude": -0.161261,
+    "minutesAway": 5,
+    "expectedCompassDirection": [
+      "SE"
+    ]
+  },
+  {
+    "latitude": 50.852195,
+    "longitude": -0.166036,
+    "minutesAway": 6,
+    "expectedCompassDirection": [
+      "SE"
+    ]
+  },
+  {
+    "latitude": 50.85501,
+    "longitude": -0.16973,
+    "minutesAway": 7,
+    "expectedCompassDirection": [
+      "SE"
+    ]
+  },
+  {
+    "latitude": 50.855936,
+    "longitude": -0.170939,
+    "minutesAway": 8,
+    "expectedCompassDirection": [
+      "W",
+      "SW",
+      "S"
+    ]
+  },
+  {
+    "latitude": 50.857784,
+    "longitude": -0.169676,
+    "minutesAway": 9,
+    "expectedCompassDirection": [
+      "W",
+      "S"
+    ]
+  },
+  {
+    "latitude": 50.856151,
+    "longitude": -0.165777,
+    "minutesAway": 10,
+    "expectedCompassDirection": [
+      "NW",
+      "N",
+      "W"
+    ]
+  },
+  {
+    "latitude": 50.853544,
+    "longitude": -0.158169,
+    "minutesAway": 11,
+    "expectedCompassDirection": [
+      "NW",
+      "N",
+      "W"
+    ]
+  },
+  {
+    "latitude": 50.853624,
+    "longitude": -0.157252,
+    "minutesAway": 12,
+    "expectedCompassDirection": [
+      "W",
+      "NW"
+    ]
+  },
+  {
+    "latitude": 50.858833,
+    "longitude": -0.156331,
+    "minutesAway": 13,
+    "expectedCompassDirection": [
+      "W",
+      "NW"
+    ]
+  },
+  {
+    "latitude": 50.853537,
+    "longitude": -0.158094,
+    "minutesAway": 14,
+    "expectedCompassDirection": [
+      "W",
+      "NW"
+    ]
+  },
+  {
+    "latitude": 50.859761,
+    "longitude": -0.158373,
+    "minutesAway": 15,
+    "expectedCompassDirection": [
+      "E",
+      "SE",
+      "S",
+      "SW",
+      "W"
+    ]
+  },
+  {
+    "latitude": 50.85886,
+    "longitude": -0.156403,
+    "minutesAway": 16,
+    "expectedCompassDirection": [
+      "E",
+      "SE",
+      "S"
+    ]
+  },
+  {
+    "latitude": 50.860497,
+    "longitude": -0.158911,
+    "minutesAway": 17,
+    "expectedCompassDirection": [
+      "SE"
+    ]
+  },
+  {
+    "latitude": 50.861503,
+    "longitude": -0.164605,
+    "minutesAway": 18,
+    "expectedCompassDirection": [
+      "NE",
+      "E",
+      "SE"
+    ]
+  },
+  {
+    "latitude": 50.860656,
+    "longitude": -0.167399,
+    "minutesAway": 19,
+    "expectedCompassDirection": [
+      "N",
+      "NE",
+      "E"
+    ]
+  },
+  {
+    "latitude": 50.859991,
+    "longitude": -0.168189,
+    "minutesAway": 20,
+    "expectedCompassDirection": [
+      "N",
+      "NE"
+    ]
+  },
+  {
+    "latitude": 50.859886,
+    "longitude": -0.168417,
+    "minutesAway": 21,
+    "expectedCompassDirection": [
+      "NW",
+      "N",
+      "NE"
+    ]
+  },
+  {
+    "latitude": 50.852867,
+    "longitude": -0.166921,
+    "minutesAway": 22,
+    "expectedCompassDirection": [
+      "NW"
+    ]
+  },
+  {
+    "latitude": 50.848231,
+    "longitude": -0.161579,
+    "minutesAway": 23,
+    "expectedCompassDirection": [
+      "NW"
+    ]
+  },
+  {
+    "latitude": 50.844783,
+    "longitude": -0.159898,
+    "minutesAway": 24,
+    "expectedCompassDirection": [
+      "NW"
+    ]
+  },
+  {
+    "latitude": 50.84171,
+    "longitude": -0.158544,
+    "minutesAway": 25,
+    "expectedCompassDirection": [
+      "NW"
+    ]
+  },
+  {
+    "latitude": 50.839085,
+    "longitude": -0.155765,
+    "minutesAway": 26,
+    "expectedCompassDirection": [
+      "NW"
+    ]
+  },
+  {
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "minutesAway": 27,
+    "expectedCompassDirection": [
+      "NW"
+    ]
+  },
+  {
+    "latitude": 0.0,
+    "longitude": 0.0,
+    "minutesAway": 28,
+    "expectedCompassDirection": [
+      "NW"
+    ]
+  },
+  {
+    "latitude": 50.853481,
+    "longitude": -0.158108,
+    "minutesAway": 29,
+    "expectedCompassDirection": [
+      "NW"
+    ]
+  },
+  {
+    "latitude": 50.853481,
+    "longitude": -0.158108,
+    "minutesAway": 30,
+    "expectedCompassDirection": [
+      "NW"
+    ]
+  }
+]

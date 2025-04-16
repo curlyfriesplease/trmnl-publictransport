@@ -12,11 +12,13 @@ provider:
     BUS_STOP_A_LATITUDE: ${env:BUS_STOP_A_LATITUDE}
     BUS_STOP_A_LONGITUDE: ${env:BUS_STOP_A_LONGITUDE}
     BUS_STOP_A_LINEREFS: ${env:BUS_STOP_A_LINEREFS}
+    # GOOGLE_MAPS_API_KEY: ${env:GOOGLE_MAPS_API_KEY} # Removed - Not needed for current approach
 
 package:
   patterns:
     - '!./**'
     - './dist/**'        # Include the compiled JS code
+    - './src/busroutes/**' # Include the route data files
     - 'node_modules/**'  # Include production dependencies
     - '!node_modules/aws-sdk/**' # Exclude AWS SDK (provided by Lambda)
     - '!src/**'          # Exclude TypeScript source
